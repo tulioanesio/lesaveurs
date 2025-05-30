@@ -18,16 +18,25 @@ The UI is based on a Figma design featuring:
 
 ## Technologies Used
 
-- [React](https://reactjs.org/)
+- [React + Vite](https://reactjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 
 ---
 
 ## Getting Started
 
-1. Clone the repository  
-2. Install dependencies  
-3. Start the development server  
+1. Clone the repository
+```
+  git clone https://github.com/tulioanesio/lesaveurs.git
+```
+2. Install dependencies
+```
+  npm install
+```
+3. Start the development server
+```
+  npm run dev
+```
 4. Open in your browser at `http://localhost:5173`
 
 ---
