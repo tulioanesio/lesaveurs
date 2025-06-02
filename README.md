@@ -1,12 +1,47 @@
-# React + Vite
+# Les Saveurs
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Les Saveurs** is a landing page project for a fictional brazillian fine dining restaurant. It offers a refined and immersive visual experience designed to reflect luxury, exclusivity, and culinary excellence. The layout is fully responsive, adapting seamlessly to mobile, tablet, and desktop screens while maintaining the same refined user experience.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Layout & Design
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The UI is based on a Figma design featuring:
+
+- Elegant serif typography
+- A dark, luxurious color palette
+- Clear visual hierarchy
+- Strong, minimalist layout with prominent call-to-action buttons
+
+---
+
+## Technologies Used
+
+- [React + Vite](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+---
+
+## Getting Started
+
+1. Clone the repository
+```
+  git clone https://github.com/tulioanesio/lesaveurs.git
+```
+2. Install dependencies
+```
+  npm install
+```
+3. Start the development server
+```
+  npm run dev
+```
+4. Open in your browser at `http://localhost:5173`
+
+---
+
+## Live Demo
+
+The project is deployed on **Vercel** and can be accessed here:  
+[**Le Saveurs**](https://lesaveurs.vercel.app/)
