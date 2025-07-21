@@ -1,21 +1,13 @@
 import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import image1 from "../../assets/image1.png";
 import image2 from "../../assets/image2.jpg";
 
 function Home() {
   return (
     <div className="bg-black text-white font-serif">
-      <header className="flex flex-col md:flex-row justify-between items-center px-6 py-4 border-b border-gray-700">
-        <h1 className="text-3xl font-bold">LES SAVEURS</h1>
-        <nav className="flex justify-center gap-6 mt-4 md:mt-0 mx-auto md:mx-0">
-          <Link to="/" className="hover:underline">
-            Home
-          </Link>
-          <Link to="/" className="hover:underline">
-            Nosso Menu
-          </Link>
-        </nav>
-      </header>
+      <Navbar />
 
       <section className="px-6 py-20 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
         <div className="md:w-1/2">
@@ -36,17 +28,16 @@ function Home() {
           </p>
           <div className="flex flex-col md:flex-row justify-center md:justify-start gap-6">
             <Link
-              to="/"
+              to="/reserva"
               className="border border-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-black transition"
             >
-              Explore nosso Menu
+              Faça sua reserva
             </Link>
           </div>
         </div>
       </section>
 
       <section className="px-6 py-16 bg-[#111] text-center md:text-left flex flex-col-reverse md:flex-row items-center gap-12 max-w-6xl mx-auto">
-        {/* Texto */}
         <div className="md:w-1/2">
           <h3 className="text-2xl font-bold mb-4">Sobre nós</h3>
           <p className="text-gray-300">
@@ -66,8 +57,8 @@ function Home() {
 
       <section className="px-6 py-12 text-center bg-black">
         <h3 className="text-2xl font-bold mb-4">Horários de Funcionamento</h3>
-        <p className="text-gray-300">Segunda - Sexta: 6:00 PM - 11:00 PM</p>
-        <p className="text-gray-300">Sábado - Domingo: 12:00 PM - 10:00 PM</p>
+        <p className="text-gray-300">Segunda - Sexta: 18:00 PM - 23:00 PM</p>
+        <p className="text-gray-300">Sábado - Domingo: 18:00 PM - 21:00 PM</p>
 
         <h3 className="text-2xl font-bold mt-10 mb-4">Endereço</h3>
         <p className="text-gray-300">Les Saveurs, 123 Rua Refinada, Cidadela, SC - Brasil</p>
@@ -88,9 +79,7 @@ function Home() {
         </blockquote>
       </section>
 
-      <footer className="px-6 py-10 text-center border-t border-gray-700 text-sm text-gray-400">
-        <p>© 2025 Les Saveurs. Todos os direitos reservados.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

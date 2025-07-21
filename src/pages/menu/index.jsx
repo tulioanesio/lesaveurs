@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar";
 
 function Menu() {
   
   return (
     <div>
-        <h1>Ola menu</h1>
+        <Navbar></Navbar>
     </div>
   );
 }
