@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 import api from "../../services/api";
 import Navbar from "../../components/Navbar";
-import { formatISO, parseISO } from "date-fns";
+import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 
 function Reserva() {
@@ -17,7 +17,7 @@ function Reserva() {
   const [reservas, setReservas] = useState([]);
   const [selectedTable, setSelectedTable] = useState(null);
   const [selectedDate, setSelectedDate] = useState(() => {
-    return new Date().toISOString().slice(0, 10);
+    return moment().format("YYYY-MM-DD");
   });
   const [time, setTime] = useState("21:00");
   const [form, setForm] = useState({ name: "", phone: "", email: "" });
@@ -35,29 +35,33 @@ function Reserva() {
   }, []);
 
   useEffect(() => {
-    const fetchReservas = async () => {
-      try {
-        const res = await api.get("/reserva/dashboard");
-        setReservas(res.data);
-      } catch (err) {
-        console.error("Erro ao buscar reservas:", err);
-      }
-    };
     fetchReservas();
   }, [selectedDate]);
 
   const isMesaOcupada = (mesaId) => {
     return reservas.some((reserva) => {
-      const reservaDay = new Date(reserva.data).toISOString().slice(0, 10);
+      const reservaDay = moment(reserva.data).format("YYYY-MM-DD");
       return reserva.mesaId === mesaId && reservaDay === selectedDate;
     });
+  };
+
+  const fetchReservas = async () => {
+    try {
+      const res = await api.get("/reserva/dashboard");
+      setReservas(res.data);
+    } catch (err) {
+      console.error("Erro ao buscar reservas:", err);
+    }
   };
 
   const handleReservation = async (e) => {
     e.preventDefault();
     if (!selectedTable) return toast.warning("Selecione uma mesa disponível.");
 
-    const dataCompleta = new Date(`${selectedDate}T${time}:00`);
+    const dataCompleta = moment(
+      `${selectedDate} ${time}`,
+      "YYYY-MM-DD HH:mm"
+    ).toISOString();
 
     try {
       await api.post("/reserva", {
@@ -65,14 +69,15 @@ function Reserva() {
         telefone: form.phone,
         email: form.email,
         mesaId: selectedTable.id,
-        data: formatISO(dataCompleta),
+        data: dataCompleta,
       });
-      toast.sucess("Reserva confirmada!");
+      toast.success("Reserva confirmada!");
+      fetchReservas();
       setSelectedTable(null);
       setForm({ name: "", phone: "", email: "" });
     } catch (err) {
       console.error(err);
-      toast.error(err.response?.data?.message || "Erro ao confirmar reserva.");
+      toast.error(err.response.data.mensagem || "Erro ao confirmar reserva.");
     }
   };
 
@@ -80,7 +85,6 @@ function Reserva() {
     <div className="min-h-screen bg-[#0f0f0f] text-white px-4 sm:px-8 py-12">
       <div className="max-w-6xl mx-auto">
         <Navbar />
-
         <section className="flex flex-col md:flex-row gap-8 py-20">
           <div className="bg-[#1a1a1a] p-6 rounded-2xl shadow-md md:w-1/2">
             <h2 className="text-2xl font-semibold mb-4 flex items-center gap-3">
@@ -156,7 +160,7 @@ function Reserva() {
               </label>
               <input
                 type="text"
-                className="w-full p-3 rounded-md bg-[#111] border border-gray-600 text-white"
+                className="w-full p-3 rounded-md bg-[#111] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-gray-700 transition"
                 placeholder="Digite seu nome completo"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -170,7 +174,7 @@ function Reserva() {
               </label>
               <input
                 type="tel"
-                className="w-full p-3 rounded-md bg-[#111] border border-gray-600 text-white"
+                className="w-full p-3 rounded-md bg-[#111] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-gray-700 transition"
                 placeholder="Digite seu telefone"
                 value={form.phone}
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
@@ -184,7 +188,7 @@ function Reserva() {
               </label>
               <input
                 type="email"
-                className="w-full p-3 rounded-md bg-[#111] border border-gray-600 text-white"
+                className="w-full p-3 rounded-md bg-[#111] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-gray-700 transition"
                 placeholder="Digite seu e-mail"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -199,7 +203,7 @@ function Reserva() {
               <select
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
-                className="w-full p-3 rounded-md bg-[#111] border border-gray-600 text-white"
+                className="w-full p-3 rounded-md bg-[#111] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-gray-700 transition"
                 required
               >
                 <option value="18:00">18:00</option>
@@ -217,9 +221,9 @@ function Reserva() {
               </label>
               <input
                 type="date"
-                className="w-full p-3 rounded-md bg-[#111] border border-gray-600 text-white"
+                className="w-full p-3 rounded-md bg-[#111] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-gray-700 transition"
                 value={selectedDate}
-                min={new Date().toISOString().slice(0, 10)} // não permite datas passadas
+                min={moment().format("YYYY-MM-DD")}
                 onChange={(e) => setSelectedDate(e.target.value)}
                 required
               />
@@ -227,7 +231,7 @@ function Reserva() {
 
             <button
               type="submit"
-              className="w-full py-4 bg-white text-black font-semibold rounded-md hover:bg-gray-100 transition"
+              className="w-full py-4 bg-white text-black font-semibold rounded-md hover:bg-gray-200 transition cursor-pointer"
             >
               Confirmar Reserva
             </button>
