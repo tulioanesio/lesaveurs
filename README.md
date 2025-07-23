@@ -1,7 +1,6 @@
 # Les Saveurs
 
-**Les Saveurs** is a landing page project for a fictional brazillian fine dining restaurant. It offers a refined and immersive visual experience designed to reflect luxury, exclusivity, and culinary excellence. The layout is fully responsive, adapting seamlessly to mobile, tablet, and desktop screens while maintaining the same refined user experience.
-
+**Les Saveurs** is a project for a fictional brazillian fine dining restaurant. It offers a refined and immersive visual experience designed to reflect luxury, exclusivity, and culinary excellence. The layout is fully responsive, adapting seamlessly to mobile, tablet, and desktop screens while maintaining the same refined user experience. This project uses the [Le Saveurs-API](https://github.com/tulioanesio/lesaveursAPI.git) developed in NestJS, responsible for managing features such as table reservations and storing customer data.
 
 ---
 
@@ -20,6 +19,7 @@ The UI is based on a Figma design featuring:
 
 - [React + Vite](https://reactjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [Axios](https://axios-http.com/docs/intro)
 
 ---
 
