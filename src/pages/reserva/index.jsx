@@ -10,6 +10,7 @@ import {
 import api from "../../services/api";
 import Navbar from "../../components/Navbar";
 import moment from "moment";
+import Footer from "../../components/Footer";
 import { ToastContainer, toast } from "react-toastify";
 
 function Reserva() {
@@ -82,8 +83,8 @@ function Reserva() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f] text-white px-4 sm:px-8 py-12">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-[#0f0f0f] text-white px-4 sm:px-8">
+      <div className="max-w-6xl mx-auto py-10">
         <Navbar />
         <section className="flex flex-col md:flex-row gap-8 py-20">
           <div className="bg-[#1a1a1a] p-6 rounded-2xl shadow-md md:w-1/2">
@@ -94,21 +95,25 @@ function Reserva() {
               Clique em uma mesa disponível para selecionar
             </p>
 
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-5">
+            <div className="grid grid-cols-4 gap-5">
               {mesas.map((mesa) => {
+                let colSpan = "col-span-1";
+                if (mesa.capacidade === 4) colSpan = "col-span-2";
+                if (mesa.capacidade === 6) colSpan = "col-span-3";
+
                 const isOccupied = isMesaOcupada(mesa.id);
                 const isSelected = selectedTable?.id === mesa.id;
+
                 return (
                   <div
                     key={mesa.id}
-                    className={`cursor-pointer p-5 rounded-lg text-sm font-semibold text-center transition-all select-none
-                      ${
-                        isOccupied
-                          ? "bg-red-600 cursor-not-allowed opacity-70"
-                          : isSelected
-                          ? "bg-blue-600 shadow-lg"
-                          : "bg-green-600 hover:brightness-110"
-                      }`}
+                    className={`cursor-pointer p-5 rounded-lg text-sm font-semibold text-center transition-all select-none ${colSpan} ${
+                      isOccupied
+                        ? "bg-red-600 cursor-not-allowed opacity-70"
+                        : isSelected
+                        ? "bg-blue-600 shadow-lg"
+                        : "bg-green-600 hover:brightness-110"
+                    }`}
                     onClick={() => {
                       if (!isOccupied) setSelectedTable(mesa);
                     }}
@@ -238,6 +243,7 @@ function Reserva() {
           </form>
         </section>
       </div>
+      <Footer />
       <ToastContainer theme="dark" autoClose={5000} />
     </div>
   );
